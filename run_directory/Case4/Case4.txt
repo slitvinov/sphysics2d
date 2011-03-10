@@ -1,0 +1,46 @@
+0   			Choose Starting options:  0=new, 1=restart, 2=new with CheckPointg, 3=restart with CheckPointing
+2   			Kernel: 1=gaussian, 2=quadratic; 3=cubic; 5=Wendland
+1   			Time-stepping algorithm: 1=predictor-corrector, 2=verlet, 3=symplectic, 4=Beeman
+1      			Density Filter: 0=none, 1=Shepard filter, 2=MLS
+30                      ndt_FilterPerform (if density filter is used) ?
+0     			Kernel correction 0=None, 1=Kernel correction, 2=Gradient kernel Correction
+3    			Viscosity treatment: 1=artificial; 2=laminar; 3=laminar + SPS
+1.0e-6     		Viscosity value( if visc.treatment=1 it's alpha, if not kinem. visc approx 1.e-6)
+0  			Vorticity printing ? (1=yes)
+1     			Equation of State: 1=Tait's equation, 2=Ideal Gas, 3= Morris
+3.0    			Maximum Depth (h_SWL) to calculate B
+16    			Coefficient of speed of sound (recommended 10 - 40 ) ??
+1     			Boundary Conditions: 1=Repulsive Force; 2=Dalrymple
+2.0e-4   		Wall viscosity value for Repulsive Force BC
+2  			Geometry of the zone:  1=BOX, 2=BEACH, 3=COMPLEX GEOMETRY
+1  			Initial Fluid Particle Structure: 1= SC, 2= BCC
+9.5,4.0   		Box dimension LX, LZ?
+0.05,0.05   		Spacing dx, dz?
+2.25    		Length of Flat Domain
+26.565051    		Slope (deg) of the inclined plane ( beta ) ??
+0,0,0  			Periodic Lateral boundaries in X, Y, & Z-Directions ? (1=yes)
+0    			If wavemaker will be added, left pannel is not needed (1=yes)
+0    			Add obstacle (1=yes)
+0    			Add gate (1=yes)
+1    			Add Raichlen Wedge (1=yes)
+0.3   			Enter block-top elevation above SWL
+2.14   			Enter specific Weight
+0.91, 0.455, 0.61  	Enter block_length, block_height, block_width
+0.04, 0.04  		Enter block dxW, dzW
+0    			Add Floating Body (1=yes)
+1    			Add water in the flat region ?? (1=yes)
+0.05, 2.20   		Cube containing particles :  XMin, Xmax ??
+0.05, 3.5  		Cube containing particles :  ZMin, Zmax ??
+1   			Add water in the inclined region ?? (1=yes)
+2.25, 9.5   		Cube containing particles :  XMin, Xmax ??
+0.05, 3.5   		Cube containing particles :  ZMin, Zmax ??
+0   			Add a solitary wave ?? (1=yes)
+3.0,0.015   		Input the tmax and out
+0.0   			initial time of outputting general data
+0,1.0,-1.0   		For detailed recording: out_dtrecording, Start time, End Time
+0.00011,1   		input dt ??, variable dt ??
+0.1   			CFL number (0.1 - 0.5)
+0.92  			h=coefficient*sqrt(dx*dx+dy*dy+dz*dz):  coefficient ???
+0   			Use of Riemann Solver: 0=None, 1=Conservative (Vila), 2=NonConservative (Parshikov)
+3  			Which compiler is desired: 1=gfortran, 2=ifort, 3=win_ifort, 4=Silverfrost FTN95
+2  			Precision of XYZ Variables: 1=Single, 2=Double

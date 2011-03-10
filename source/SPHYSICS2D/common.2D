@@ -1,0 +1,159 @@
+c234567891123456789212345679312345678941234567895123456789612345678971234567898
+      parameter(npar=100000,nb_max=12000,num_FB_max=21)
+      parameter(nct_max=30000,nplink_max=120)
+      include 'precision_kind.2D'
+      include 'precision_xz.2D'
+      include 'precision_dr.2D'
+      include 'precision_FB.2D'
+
+      common /ccloc/  xp(npar),zp(npar), xo(npar),zo(npar)
+      common /ccloc2/ up(npar),wp(npar),rhop(npar),p(npar),pm(npar),
+     2                cs(npar),TEp(npar)
+      common /ccold/ uo(npar),wo(npar),
+     1               rhoo(npar),po(npar),pr(npar),TEo(npar)
+      common /cdot/  xdot(npar),zdot(npar),udot(npar),
+     1               wdot(npar),rdot(npar),TEdot(npar)
+      common /cdot2/ Volrudot(npar),Volrwdot(npar),
+     1               Volrdot(npar) ,VolrTotalEdot(npar),
+     2               Volrhou(npar) ,Volrhow(npar),
+     3               Volrho(npar)  ,VolTotalE(npar),
+     4               Volrhoo(npar) ,Volrhouo(npar),
+     5               Volrhowo(npar),VolTotalEo(npar),
+     6               Volo(npar),TotalE(npar)   
+      common /cctime/ time,dt,dt2,tmax,out,trec_ini,ivar_dt,
+     1                visc_dt,twavemaker,tgate,itime,CFL_number
+      common /detailed/dtrec_det,t_sta_det,t_end_det
+      common /bcs/   D,r0,ip1,ip2,nb,nbp1,np,
+     1               nb1,nb2,nb3
+      common /fast/  xmin,xmax,zmin,zmax,ncx,ncz,nct,nc(nct_max,2)   
+      common /kern/  h,c1,d1,c2,a1,a2,a24,f1,
+     1               b1,e1,aa,pi,twopi,od_Wdeltap,h2,
+     2               fourh2,Awen,Bwen,
+     3               one_over_2h,one_over_h,two_h,four_h,six_h,
+     5               h_over_100,h_over_1000
+      common /cvis/  viscos_val,eta,eta2,visc_wall
+      common /state/ B,gamma,rho0,cs0,TE0,i_gamma,h_SWL,i_EoS,
+     1               one_over_beta_coef2,one_over_beta_coef
+      common /damp/  gg,damp
+      common /xsph/  xcor(npar),zcor(npar),eps
+      common /body/  grx,grz,thetam,omega,gx,gy,stheta,orig
+      common /wbc/   mw1,mw2,xamp,xfreq,h0,xorig(npar),
+     1               iwmcase
+      common /newac/ ax(npar),az(npar),ar(npar),
+     1               ux(npar),wx(npar),zx(npar), aTE(npar) 
+      common /newac2/ aVol(npar) 
+      common /val_kernel/ sum_wab(npar),rhop_sum(npar),Wab,frx,
+     1                   fry,frz
+      common /marching/ ncall1,ncall2,ncall3,ncall4,ncall5,ncall6,
+     1                  ncall7,ncall8,ncall9,ncall10,
+     2                  ncall11,ncall12,ncall13
+      common /CSPH/ dudx_CSPH(npar)    ,dudz_CSPH(npar),
+     1              dwdx_CSPH(npar)    ,dwdz_CSPH(npar),
+     2              drhodx_CSPH(npar)  ,drhodz_CSPH(npar),
+     3              dTEdx_CSPH(npar)   ,dTEdz_CSPH(npar),
+     4              drhoudx_CSPH(npar) ,drhoudz_CSPH(npar),
+     5              drhowdx_CSPH(npar) ,drhowdz_CSPH(npar),
+     6              dTotalEdx_CSPH(npar),dTotalEdz_CSPH(npar)
+      common /CSPHo/dudx_CSPHo(npar)    ,dudz_CSPHo(npar),
+     1              dwdx_CSPHo(npar)    ,dwdz_CSPHo(npar),
+     2              drhodx_CSPHo(npar)  ,drhodz_CSPHo(npar),
+     3              dTEdx_CSPHo(npar)   ,dTEdz_CSPHo(npar),
+     4              drhoudx_CSPHo(npar) ,drhoudz_CSPHo(npar),
+     5              drhowdx_CSPHo(npar) ,drhowdz_CSPHo(npar),
+     6              dTotalEdx_CSPHo(npar),dTotalEdz_CSPHo(npar)
+      common /SPS/  twoThirds,blin_const,Smag,dp,dpx,dpy,dpz,
+     1              tau_xx_uno_rho2(npar),tau_xz_uno_rho2(npar),
+     2              tau_zz_uno_rho2(npar),
+     3              visc_SPS_max
+      common /vorticity/ i_vort,curl3y_a(npar),curl3y_b(npar)
+      common /savedata/ipoute
+      common /DBC/nstep_DBC,ndt_DBCPerform
+       common /verlet/ rhom1(npar),ndt_VerletPerform,
+     1                um1(npar),wm1(npar),dtsq,TEm1(npar),
+     2                nstep_verlet
+      common /density_filter/ index_tensile,adh,
+     1                        pVol(npar),ndt_FilterPerform,
+     2                        one_over_rhop(npar)
+      common /BP_Normals/ nstart,nstart_minus1,
+     1                 xnb(nb_max),znb(nb_max),
+     2                 xtb(nb_max),ztb(nb_max),
+     3                 deltaptb(nb_max,2)
+      common /BP_normalInfo/
+     1           iBP_Pointer_Info(nb_max,4), BP_xz_Data(nb_max,2)
+      common /BP_correctionInfo/ two_alpha_h, rNum_h, one_over_rNum_h, 
+     1           one_over_r_ij_dot_n
+      common /periodicBCs/ i_periodicOBs(3)
+      common /double_vars/ xmin_container_double,xmax_container_double
+      common /mobilgate/ iopt_gate,ngate_ini,ngate_end,
+     1                   VXgate,VZgate
+      common /wave_maker/ iopt_wavemaker,i_paddleType,
+     1                   nwavemaker_ini,Xwavemaker,
+     2                   nwavemaker_end,Nfreq,ind_wm,ind1_wm,
+     3                   Period(0:1000),A_wavemaker(0:1000),
+     4                   phase(0:1000),twinitial(0:1000),
+     5                   flap_length, paddle_SWL,stroke,
+     6                   X_PaddleCentre,xp_ini(nb_max),
+     7                   n_paddleData,time_paddle(20001),
+     8                   x_paddle(20001),u_paddle(20001)
+      common /RaichlenWedge_Vars/ iopt_RaichlenWedge,
+     1                 bslope,i_RBend,RBtime(1000),RBxpos(1000),
+     2                 xp_Wedge_initial(nb_max),
+     3                 zp_Wedge_initial(nb_max)
+      common /rigidbody/ iopt_FloatingBodies,num_FB,nb_FB(num_FB_max),
+     &    i_FB_Pointer_Info(nb_max),
+     &    XcylinderDimension(num_FB_max),
+     &    ZcylinderDimension(num_FB_max),
+     &    bigMass(num_FB_max),
+     &    bigInertiaYY(num_FB_max),
+     &    cylinderDensity(num_FB_max),FB_SpecificWeight(num_FB_max),
+     &    SpecificWeight,friction_coeff(num_FB_max),
+     &    bigU(num_FB_max),bigW(num_FB_max),
+     &    bigOmegaX(num_FB_max),OmegaXdot(num_FB_max),
+     &    bigOmegaY(num_FB_max),OmegaYdot(num_FB_max),
+     &    bigOmegaZ(num_FB_max),OmegaZdot(num_FB_max),
+     &    BigUdot(num_FB_max),BigWdot(num_FB_max),
+     &    BodyForce_x,BodyForce_z,
+     &    X_nonFriction(num_FB_max), 
+     &    Z_nonFriction(num_FB_max),
+     &    X_Friction(num_FB_max), 
+     &    Z_Friction(num_FB_max),
+     &    nb_inFriction(num_FB_max), 
+     &    u_parallel_max,one_over_u_parallel_max,
+     &    bigU_old(num_FB_max),
+     &    bigW_old(num_FB_max),
+     &    bigOmegaY_old(num_FB_max)
+     
+      common /rigidbody_Dbles/
+     &    Box_XC(num_FB_max),Box_ZC(num_FB_max),
+     &    Box_XC_old(num_FB_max),
+     &    Box_ZC_old(num_FB_max),
+     &    xp_minus_R0(nb_max),zp_minus_R0(nb_max),
+     &    rp_minus_R0_2(nb_max),rp_minus_R0_2_init(nb_max)
+      common /mobilparticles/ nbf,nbfp1,nbfm,iopt_movingObject
+      common /keeplist/ keep_nc(npar)
+      common /compiling_options/i_viscos,i_kernel,i_algorithm,
+     1                         iBC,i_DensityFilter, 
+     2                         i_kernelcorrection                       
+      common /time_step/ dt_1,dt_2,dt_new
+      common /container/xmax_container,xmin_container,
+     1                  zmin_container,iflag(npar),
+     2                  xtrash,ytrash,ztrash,nct_ini,zmax_ini,
+     4                  ncz_ini,zcontrol
+      common /geometry/ i_geometry,vlx1,vlx2,vlx,vlz  
+      common /fluidgrid/ lattice,vnorm_mass
+      common /restartruns/ngrab,grab_P,grab_E,i_restartRun
+      common /iboxtemp/ ibox(nct_max,2,nplink_max)
+	  common /Shepard/ nstart_Shepard
+      common /MovingLeastSquares/ nstart_MLS,i_MLS_part,
+     1      beta0_MLS(npar),
+     2      beta1x_MLS(npar),beta1z_MLS(npar),
+     3      rhop_sum_MLS(npar),A_MLS(npar,3,3)
+      common /Beeman/udotm1(npar),wdotm1(npar),
+     1      udoto(npar),wdoto(npar),
+     2      rdotm1(npar),rdoto(npar) 
+      common /KGC/ frxi,frzi,frxj,frzj,
+     &     aM_a11(npar),aM_a12(npar),aM_a21(npar),aM_a22(npar),
+     1     aL_a11(npar),aL_a12(npar),aL_a21(npar),aL_a22(npar)
+      common /Riemann/ iRiemannSolver,iTVD,beta_lim
+      
+     

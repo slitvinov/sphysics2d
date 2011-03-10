@@ -1,0 +1,3 @@
+      double precision xp, zp
+      double precision dx, dz
+      double precision XXmin,XXmax,ZZmin,ZZmax

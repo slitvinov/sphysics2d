@@ -1,0 +1,69 @@
+--- PLOTTING USING PARAVIEW for 2D version of SPHYSICS ---
+
+(All source codes for SPHYSICS are distributed under the terms of General Public License, GPL, as published by the Free Software Foundation, http://www.gnu.org)
+
+CONTENTS
+1. Files
+2. Running PART2VTU_2D
+3. Plotting PART2VTU output
+
+
+1. Files
+This directory contains the source code for converting the SPHYSICS ascii output files (PART_ijkl) to VTU format for use in ParaView
+source code:	PART2VTU_2D.f
+make files:	PART2VTU_cvf.mak 
+		PART2VTU_gfortran.mak
+		PART2VTU_ifort.mak
+		PART2VTU_ftn95.mak
+batch files:	PART2VTU_windows_cvf.bat
+		PART2VTU_windows_ftn95.bat
+		PART2VTU_unix_gfortran.bat
+		PART2VTU_unix_ifort.bat
+		PART2VTU_windows_cygwin_gfortran.bat
+
+2. Running PART2VTU_2D
+Which Compilers?
+- Under windows the code has been run using the Compaq Visual Fortran (CVF) compiler.
+- Under linux the code has been run using the GCC gfortran compiler and the Intel ifort compiler. These compilers along with the GNU Make utility should be available on the machine's default PATH.
+
+
+(i) COPY PART2VTU batch file
+Copy the relevant batch file from this directory to the directory run_directory/CaseN/
+
+Change to directory: run_directory/CaseN/
+
+(ii) COMPILE & RUN PART2VTU EXECUTABLE IN ONE STEP
+
+In directory: run_directory/CaseN/ where N is the number of the case to run.
+
+LINUX/UNIX:
+      ./PART2VTU_unix_ifort.bat   OR ./PART2VTU_unix_gfortran.bat
+
+CVF on WINDOWS:
+      .\PART2VTU_windows_cvf.bat
+
+FTN95 on WINDOWS:
+      .\PART2VTU_windows_ftn95.bat
+
+gfortran on Cygwin (WINDOWS):
+      ./PART2VTU_windows_cygwin_gfortran.bat
+
+This compiles and runs the PART2VTU code creating an executable in directory execs/.  
+Answer Input Questions
+
+
+3. Plotting PART2VTU output
+SPHYSICS comes with routines to plot the results in both Matlab and ParaView 3.  The SPHYSICS code generates the following output files:
+PART_ijkl	: Particle Field snap shot, x y z u v w ....
+DT		: Output timesteps of PART_ijkl files
+
+Under the following directory run_directory/CaseN/ParaviewFiles/VTU/, PART2VTU generates the following files:
+PARTijkl.vtu
+VTUinp.pvd
+
+If the directories ParaviewFiles/VTU/ do not exist, they are created in the current working directory for each case, i.e. run_directory/CaseN/
+
+Plotting in ParaView 3:
+(i)    In ParaView, use the Pipeline browser to load in the .vtu files.
+(ii)   For animations, load only the pvd file in first, click Apply.
+(iii)  Use Filters and Threshold, etc., on scalar values, etc., to create desired image.

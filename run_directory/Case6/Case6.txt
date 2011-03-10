@@ -1,0 +1,84 @@
+0  			Choose Starting options:  0=new, 1=restart, 2=new with CheckPointg, 3=restart with CheckPointing
+2  			Kernel: 1=gaussian, 2=quadratic; 3=cubic; 5=Wendland
+3  			Time-stepping algorithm (1=predictor-corrector, 2=verlet, 3=symplectic, 4=Beeman)
+0  			Density Filter: 0=none, 1=Shepard filter, 2=MLS
+0  			Kernel correction 0=None, 1=Kernel correction, 2=Gradient kernel Correction
+2  			Viscosity treatment: 1=artificial; 2=laminar; 3=laminar + SPS
+1.0e-6  		Viscosity value( if visc.treatment=1 it's alpha, if not kinem. visc approx 1.e-6)
+0  			Vorticity printing ? (1=yes)
+1  			Equation of State: 1=Tait's equation, 2=Ideal Gas, 3= Morris
+0.18  			Maximum Depth (h_SWL) to calculate B
+16  			Coefficient of speed of sound (recommended 10 - 40 ) ??
+1  			Boundary Conditions: 1=Repulsive Force; 2=Dalrymple
+0.0e-3  		Wall viscosity value for Repulsive Force BC
+2    			Geometry of the zone:  1=BOX, 2=BEACH, 3=COMPLEX GEOMETRY
+1  			Initial Fluid Particle Structure: 1= SC, 2= BCC
+4.75,0.3    		Box dimension LX, LZ?
+0.01,0.01   		Spacing dx, dz?
+2.0    			Length of Flat Domain
+4.2364   		Slope (deg) of the inclined plane ( beta ) ??
+0,0,0                   Periodic Lateral boundaries in X, Y, & Z-Directions ? (1=yes)
+1      			If wavemaker will be added, left pannel is not needed (1=yes)
+0     			Add obstacle (1=yes)
+2     			Enter Paddle-Type: 1=Piston, 2=Piston-flap, 3=Piston with prescribed motion
+0.23   			X_PaddleCentre
+0.15   			paddle_SWL
+0.1344   		flap_length = distance of pivot point under bed
+0.0,0.3   		ZZMin, ZZmax of the wavemaker ??
+0.0   			Initial time of wavemaker = twavemaker ??
+1   			Number of frequencies  ??
+0.2   			Wavemaker Stroke = 2*Amplitude   ??
+1.4   			Period  ??
+0   			Phase  ??
+0   			twinitial  ??
+0   			Add another wavemaker inside the beach (1=yes)
+0   			Add gate (1=yes)
+0   			Add Sliding Raichlen Wedge (1=yes)
+1   			Add Floating Body (1=yes)
+1  			Type of Floating Object: (1) Square, (2) Antifer, (3) Other
+0.06, 0.06   		Enter square cylinderDimension
+1.0    			Enter specific Weight
+2.38, 0.16   		Enter x,z of Bottom Left Corner (x_BottomLeft, z_BottomLeft)
+0.0, 0.0   		Enter (x,z) shift of Centre of Gravity for use in Parallel Axis Theorem
+0.0, 0.0   		Enter initial U,W velocity of Object
+0.0, 0.0   		Enter initial Body Angle and Rotation Rate (Omega)  - Positive anticlockwise
+0.20   			Enter coefficient of Friction
+1    			Add another Floating Body (1=yes)
+1  			Type of Floating Object: (1) Square, (2) Antifer, (3) Other
+0.06, 0.06   		Enter square cylinderDimension
+1.0    			Enter specific Weight
+2.70, 0.16   		Enter x,z of Bottom Left Corner (x_BottomLeft, z_BottomLeft)
+0.0, 0.0   		Enter (x,z) shift of Centre of Gravity for use in Parallel Axis Theorem
+0.0, 0.0   		Enter initial U,W velocity of Object
+0.0, 0.0   		Enter initial Body Angle and Rotation Rate (Omega)  - Positive anticlockwise
+0.20   			Enter coefficient of Friction
+1   			Add another Floating Body (1=yes)
+1  			Type of Floating Object: (1) Square, (2) Antifer, (3) Other
+0.06, 0.06   		Enter square cylinderDimension
+1.0    			Enter specific Weight
+3.56, 0.22   		Enter x,z of Bottom Left Corner (x_BottomLeft, z_BottomLeft)
+0.0, 0.0   		Enter (x,z) shift of Centre of Gravity for use in Parallel Axis Theorem
+0.0, 0.0   		Enter initial U,W velocity of Object
+0.0, 10.0   		Enter initial Body Angle and Rotation Rate (Omega)  - Positive anticlockwise
+0.20    		Enter coefficient of Friction
+0    			Add another Floating Body (1=yes)
+1    			Add water in the flat region ?? (1=yes)
+0, 2.0   		Cube containing particles :  XMin, Xmax ??
+0.025, 0.18   		Cube containing particles :  ZMin, Zmax ??
+1    			Add water in the inclined region ?? (1=yes)
+2.01, 4.75    		Cube containing particles :  XMin, Xmax ??
+0.025, 0.18   		Cube containing particles :  ZMin, Zmax ??
+0    			Add a solitary wave ?? (1=yes)
+7.0,0.0500    		Input the tmax and out
+0.0     		initial time of recording
+0.0,1.0,-1.0   		detailed recording: out_dtrecording, Start time, End Time
+0.00020,1   		input dt ??, variable dt ??
+0.2   		        CFL number (0.1-0.5)
+0.92   			h=coefficient*sqrt(dx*dx+dy*dy+dz*dz):  coefficient ???
+1   			Use of Riemann Solver: 0=None, 1=Conservative (Vila), 2=NonConservative (Parshikov)
+1,1.3   		Use TVD, slope limiter (beta_lim)?'
+3  			Which compiler is desired: 1=gfortran, 2=ifort, 3=win_ifort, 4=Silverfrost FTN95
+2      			Precision of XYZ Variables: 1=Single, 2=Double
+
+
+

@@ -1,0 +1,2 @@
+      real(kind=kind_XZ) xp, zp, xo, zo, xm, zm
+      double precision xmin_container_double, xmax_container_double

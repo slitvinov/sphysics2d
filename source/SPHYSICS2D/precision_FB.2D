@@ -1,0 +1,5 @@
+      real(kind=kind_XZ) Box_XC, Box_ZC
+      real(kind=kind_XZ) xp_minus_R0,zp_minus_R0
+      real(kind=kind_XZ) rp_minus_R0_2,rp_minus_R0_2_init
+      real(kind=kind_XZ) Box_XC_old, Box_ZC_old
+      

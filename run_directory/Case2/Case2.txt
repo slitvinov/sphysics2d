@@ -1,0 +1,48 @@
+0  			Choose Starting options:  0=new, 1=restart, 2=new with CheckPointg, 3=restart with CheckPointing
+3  			Kernel: 1=gaussian, 2=quadratic; 3=cubic; 5=Wendland
+1  			Time-stepping algorithm: 1=predictor-corrector, 2=verlet, 3=symplectic, 4=Beeman
+0  			Density Filter: 0=none, 1=Shepard filter, 2=MLS
+0  			Kernel correction 0=None, 1=Kernel correction, 2=Gradient kernel Correction
+1  			Viscosity treatment: 1=artificial; 2=laminar; 3=laminar + SPS
+0.08                    Viscosity value( if visc.treatment=1 it's alpha, if not kinem. visc approx 1.e-6)
+0  			Vorticity printing ? (1=yes)
+1  			Equation of State: 1=Tait's equation, 2=Ideal Gas, 3= Morris
+0.15   			Maximum Depth (h_SWL) to calculate B
+13   			Coefficient of speed of sound (recommended 10 - 40 ) ??
+2   			Boundary Conditions: 1=Repulsive Force; 2=Dalrymple
+1                       ndt_DBCPerform ? (1 means no correction)
+1  			Geometry of the zone:  1=BOX, 2=BEACH, 3=COMPLEX GEOMETRY
+2  			Initial Fluid Particle Structure: 1= SC, 2= BCC
+2,0.16   	        Box dimension LX,LZ?
+0.005,0.005    	        Spacing dx,dz?
+0   		        Inclination of floor in X ( beta ) ??
+0,0,0                   Periodic Lateral boundaries in X, Y, & Z-Directions ? (1=yes)
+0    		        Add wall
+0    		        Add an obstacle (1=y)
+0   		        Add wavemaker (1=y)
+1   		        Add gate (1=y)
+0.388    	        Gate position in X coordinates ??'
+0.,0.16    	        Gate height ??
+0.,1.5      	        Gate Velocity  ??
+0    		        t gate??
+0    		        Add new gate (1=y)
+0                       Add Floating Bodies (1=yes) ?
+2   		        Initial conditions: 2) particles on a staggered grid 
+0     		        Correct pressure at boundaries ?? (1=y)
+0.005,0.376    	        Cube containing particles : XMin, Xmax ??
+0.005,0.15    	        Cube containing particles : ZMin, Zmax ??
+1     		        Fill a new region
+0.40,1.995    	        Cube containing particles : XMin, Xmax ??
+0.005,0.018    	        Cube containing particles : ZMin, Zmax ??
+0     		        Fill a new region
+1.2,0.01    	        Input the tmax and out
+0.0     	        Initial time of outputting general data
+0.0005,1.0,-1.0         For detailed recording during RUN: out_detail, start, end
+0.0001,1      	        Input dt, i_var_dt ??
+0.2      	        CFL number (0.1-0.5)
+0.92     	        h=coefficient*sqrt(dx*dx+dz*dz):  coefficient ???
+0      			Use of Riemann Solver: 0=None, 1=Conservative (Vila), 2=NonConservative (Parshikov)
+3  			Which compiler is desired: 1=gfortran, 2=ifort, 3=win_ifort, 4=Silverfrost FTN95
+1  			Precision of XYZ Variables: 1=Single, 2=Double
+
+

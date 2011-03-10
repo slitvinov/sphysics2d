@@ -1,0 +1,71 @@
+c234567891123456789212345679312345678941234567895123456789612345678971234567898
+      
+      parameter(npar=300000,nb_max=20000,num_FB_max=40)
+      parameter(nct_max=400000,nplink_max=50)
+      parameter(n_trapezoid_max = 2)
+
+      include 'precision_xz.gen2D'
+
+      common /ccloc/ xp(npar),zp(npar)
+      common /ccloc2/ up(npar),wp(npar),rhop(npar),p(npar),
+     1               pm(npar),cs(npar),TEp(npar)
+      common /cctime/ time,dt,dt2,tmax,out,trec_ini,CFL_number
+
+      common /bcs/   D,r0,ip1,ip2,nb,nbp1,np
+      common /geometry/ i_geometry,vlx1,vlx2,vlx,vly,vlz,dpx,dpy,dpz,
+     +                  xb_min,xb_max,yb_min,yb_max,zb_min,zb_max,h_SWL
+      common /kern/  pi,cs0,h
+      common /cvis/  viscos_val,eta,eta2
+      common /state/ B,gamma,rho0,i_EoS
+      common /damp/  gg,damp
+
+      common/Normals/ iBC,nNormal,
+     1                 xnb(nb_max),znb(nb_max)
+      common /BP_normalInfo/
+     1           iBP_Pointer_Info(nb_max,4), BP_xz_Data(nb_max,2)
+      common /periodicBCs/ i_periodicOBs(3)
+      common /mobilparticles/ nbf,nbfp1,nbfm
+      common /mobilgate/ iopt_gate,ngate_ini,ngate_end,
+     +                   VXgate,VYgate,VZgate,tgate
+      common /obstacles/ i_obstacleShape,
+     1    n_trapezoid,
+     2    x_trapezoid(n_trapezoid_max,4),z_trapezoid(n_trapezoid_max,4)
+      common /Wavemaker_var/ iopt_wavemaker,i_paddleType,
+     1                   nwavemaker_ini,X_PaddleCentre,
+     2                   nwavemaker_end,Nfreq,
+     3                   Period(100),A_wavemaker(100),
+     4                   Phase(100),twinitial(100),
+     5                   flap_length, paddle_SWL, stroke,
+     6                   X_PaddleStart_3	     
+      common /compiling_options/i_viscos,i_kernel,i_algorithm,
+     1                         i_kernelcorrection 
+      common /fluidgrid/ lattice,vnorm_mass
+      common /restartruns/i_restartRun
+      common /density_filter/ i_DensityFilter
+      common /Riemann/ i_ConservativeFormulation,iRiemannSolver,iTVD
+      common /RaichlenWedge_Vars/ iopt_RaichlenWedge,block_length,
+     1                 block_height,block_width,block_top,
+     2                 block_xstart_point,block_xfinish_point,
+     3                 block_ystart_point,block_yfinish_point,
+     4                 bslope,x_beach_start
+      common /rigidbody/ iopt_FloatingBodies,num_FB,nb_FB(num_FB_max),
+     1    x_cyl_min(num_FB_max),x_cyl_max(num_FB_max),
+     2    z_cyl_min(num_FB_max),z_cyl_max(num_FB_max),
+     3    XcylinderDimension(num_FB_max),ZcylinderDimension(num_FB_max),
+     4    bigMass(num_FB_max),bigInertiaYY(num_FB_max),
+     5    cylinderDensity(num_FB_max),FB_SpecificWeight(num_FB_max),
+     6    bigU(num_FB_max),bigW(num_FB_max),bigOmega(num_FB_max),
+     7    Box_XC(num_FB_max),Box_ZC(num_FB_max),
+     &    body_Angle(num_FB_max), 
+     &    friction_coeff(num_FB_max)
+     &    ,iopt_FloatingObject_type(num_FB_max)
+     &    ,antiferBottom(num_FB_max)
+     &    ,antiferTop(num_FB_max),Antifer_XRatio(num_FB_max)
+     &    ,antiferHeight(num_FB_max)
+     &    ,Antifer_HeightRatio(num_FB_max)
+     &    ,Antifer_CoG_Z_ratio(num_FB_max)
+      common /posCheck/ ncall1,ncall2,ncall3,ncall4,ncall5,
+     1                  ncall6,ncall7,ncall8,ncall9,ncall10,four_h,
+     2                  ncx,ncy,ncz,nsheet,nc(nct_max),one_over_2h,
+     3                  ibox(nct_max,nplink_max),xGC_min,zGC_min
+  
