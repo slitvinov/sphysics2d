@@ -11,15 +11,15 @@ if [ $? -eq 0 ]; then
     cp SPHYSICS.mak ../../source/SPHYSICS2D/
     cd ../../source/SPHYSICS2D
     pwd
-    make -f SPHYSICS.mak clean
-    make -f SPHYSICS.mak 
+    make -f SPHYSICS_gfortran.mak clean
+    make -f SPHYSICS_gfortran.mak 
     if [ $? -eq 0 ]; then
       SPHYSICScompilationDone="yes"
       echo 'SPHYSICScompilationDone = ' $SPHYSICScompilationDone
       rm SPHYSICS.mak
       cd $UDIRX
       pwd
-      cp ../../execs/SPHYSICS_2D ./
+      cp ../../source/SPHYSICS2D/SPHYSICS_2D SPHYSICS_2D
       ./SPHYSICS_2D
     else
       cd $UDIRX
